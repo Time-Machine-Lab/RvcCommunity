@@ -9,6 +9,7 @@ import com.tml.domain.entity.Rule;
 import com.tml.domain.entity.RvcLevelTask;
 import com.tml.domain.entity.RvcLevelUser;
 import com.tml.mapper.RvcLevelUserMapper;
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Component;
@@ -19,6 +20,7 @@ import java.util.Objects;
 
 
 @Component
+@Scope("prototype")
 public class LastStepApproveChain extends ApproveChain {
     @Resource
     private RedisTemplate redisTemplate;

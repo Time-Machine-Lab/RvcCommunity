@@ -48,6 +48,8 @@ public class PrivilegeSystemAspect {
      * 3、进行权限校验
      * @param joinPoint
      */
+    //todo 优化点：1、后面三个不走sql  走本地缓存或者redis  2、对于所有的操作 权限校验和读取数据一起进行  最后的时候判断是否有权限 若无不返回数据
+
     private void handleBefore(ProceedingJoinPoint joinPoint) throws Exception {
         ServletRequestAttributes requestAttributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = requestAttributes.getRequest();

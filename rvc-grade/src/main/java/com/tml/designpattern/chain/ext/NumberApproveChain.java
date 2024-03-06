@@ -4,6 +4,7 @@ import com.tml.designpattern.chain.ApproveChain;
 import com.tml.domain.dto.MqConsumerTaskDto;
 import com.tml.domain.entity.Rule;
 import com.tml.domain.entity.RvcLevelTask;
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.stereotype.Component;
@@ -18,6 +19,7 @@ import java.util.Objects;
  * @DATE: 2024/2/26
  */
 @Component
+@Scope("prototype")
 public class NumberApproveChain extends ApproveChain {
 
     @Resource
