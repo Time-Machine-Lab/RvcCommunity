@@ -18,6 +18,12 @@
     </properties>
 
     <dependencies>
+<!--bootstrap-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.tml</groupId>
             <artifactId>rvc-rpc</artifactId>

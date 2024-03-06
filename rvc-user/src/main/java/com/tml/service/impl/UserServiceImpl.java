@@ -96,7 +96,7 @@ public class UserServiceImpl implements UserService {
             throw new ServerException(ResultEnums.VER_CODE_ERROR);
         }
         UserInfo userInfo = new UserInfo();
-        UserData userData = new UserData("0",0,0,0,0);
+        UserData userData = new UserData("0",0,0,0,0,0);
         userInfo.setEmail(email);
         userInfo.setPassword(DigestUtils.md5Hex(registerDTO.getPassword()));
         userInfo.setRegisterData(LocalDateTime.now());
