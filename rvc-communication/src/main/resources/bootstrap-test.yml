@@ -1,9 +1,9 @@
 spring:
   cloud:
     nacos:
-      server-addr: ${NACOS_SERVER_ADDR:ENC(VdzZDIUI6EP3mXnpOmb0l46RpSA5HlJgqy9/ZxU0Mx3U777m+o9J6Q==)}
-      username: ${NACOS_SERVER_USER:ENC(qqqHXA1bwhhYPJ9SXXZqyO5j//wygYDK)}
-      password: ${NACOS_SERVER_PASSWORD:ENC(v1J0g/bB0xWCi9Te8mwH1o309G9xtm6q1L8SeCkYdYY=)}
+      server-addr: ${NACOS_SERVER_ADDR:ENC(0+lMOGVDBO4F81w0IYsq1nbJ68SsAbCXd0oZLCjPgdU=)}
+      username: ${NACOS_SERVER_USER:ENC(74lu5M++MgvsFZXcqUzgfBnVs5md4Ws3)}
+      password: ${NACOS_SERVER_PASSWORD:ENC(LUTdAto7NS2SXxnzxWAxRpMraXEq3cYVHSnHwfhO+RU=)}
       config:
         file-extension: yaml
         prefix: rvc-public-config

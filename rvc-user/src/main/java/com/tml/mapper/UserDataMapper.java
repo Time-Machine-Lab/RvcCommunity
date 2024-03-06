@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import java.util.List;
+
 /**
  * @Date 2023/12/8
  * @Author xiaochun
@@ -14,4 +16,8 @@ import org.apache.ibatis.annotations.Select;
 public interface UserDataMapper extends BaseMapper<UserData> {
     @Select("SELECT * FROM rvc_user_data WHERE uid = #{uid}")
     UserData selectByUid(@Param("uid") String uid);
+
+    List<UserData> selectTop1000UsersByFans();
+
+    List<UserData> selectTop10000UsersTop();
 }

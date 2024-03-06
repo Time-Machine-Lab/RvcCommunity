@@ -6,7 +6,7 @@ spring:
   application:
     name: rvc-communication-service
   profiles:
-    active: ${ACTIVE:test}
+    active: ${ACTIVE:dev}
 feign:
   client:
     config:
