@@ -44,3 +44,5 @@ EncYMLTest.*
 /rvc-gateway/src/main/resources/bootstrap-xc.yml
 /rvc-model/src/main/resources/application-xc.yml
 /rvc-user/src/test/java/com/tml/FeignTest.java
+/rvc-user/src/test/java/com/tml/Test.java
+/rvc-top/src/main/resources/bootstrap-dev.yml

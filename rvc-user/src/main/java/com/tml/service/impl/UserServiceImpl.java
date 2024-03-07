@@ -3,7 +3,7 @@ package com.tml.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.tml.client.FileServiceClient;
-import com.tml.common.rabbitmq.RabbitMQListener;
+//import com.tml.common.rabbitmq.RabbitMQListener;
 import com.tml.config.FileConfig;
 import com.tml.exception.RvcSQLException;
 import com.tml.exception.ServerException;
@@ -57,8 +57,8 @@ public class UserServiceImpl implements UserService {
     @Resource
     UserDataMapper userDataMapper;
 
-    @Resource
-    RabbitMQListener rabbitMQListener;
+//    @Resource
+//    RabbitMQListener rabbitMQListener;
 
     @Resource
     CodeUtil codeUtil;
