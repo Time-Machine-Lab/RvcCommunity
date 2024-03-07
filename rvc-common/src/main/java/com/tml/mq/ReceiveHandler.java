@@ -26,7 +26,7 @@ import static com.tml.constant.DetectionConstants.AUDIO_ROUTER_KEY;
 public abstract class ReceiveHandler {
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(),
-            exchange = @Exchange(name = RES_EXCHANGE_NAME,type = ExchangeTypes.FANOUT),
+            exchange = @Exchange(name = RES_EXCHANGE_NAME,type = ExchangeTypes.TOPIC),
             key = TEXT_ROUTER_KEY
     ))
     public void receive_text(Message message) throws JsonProcessingException{
@@ -36,7 +36,7 @@ public abstract class ReceiveHandler {
 
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(),
-            exchange = @Exchange(name = RES_EXCHANGE_NAME,type = ExchangeTypes.FANOUT),
+            exchange = @Exchange(name = RES_EXCHANGE_NAME,type = ExchangeTypes.TOPIC),
             key = IMAGE_ROUTER_KEY
     ))
     public void receive_image(Message message) throws Exception {
@@ -47,7 +47,7 @@ public abstract class ReceiveHandler {
 
     @RabbitListener(bindings = @QueueBinding(
             value = @Queue(),
-            exchange = @Exchange(name = RES_EXCHANGE_NAME,type = ExchangeTypes.FANOUT),
+            exchange = @Exchange(name = RES_EXCHANGE_NAME,type = ExchangeTypes.TOPIC),
             key = AUDIO_ROUTER_KEY
     ))
     public void receive_audio(Message message) throws Exception {

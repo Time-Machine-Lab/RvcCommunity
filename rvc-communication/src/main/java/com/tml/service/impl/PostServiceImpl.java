@@ -15,6 +15,8 @@ import com.tml.domain.dto.CoverDto;
 import com.tml.domain.dto.PageInfo;
 import com.tml.domain.dto.PostDto;
 import com.tml.domain.entity.*;
+import com.tml.domain.vo.ScoreListVo;
+import com.tml.domain.vo.TaskDataRes;
 import com.tml.handler.exception.SystemException;
 import com.tml.mapper.common.CommonMapper;
 import com.tml.mapper.post.*;
@@ -510,6 +512,29 @@ public class PostServiceImpl implements PostService {
                 .build();
         coverMapper.insert(build);
         return uuid;
+    }
+
+    @Override
+    public TaskDataRes scoreList() {
+        // id和score   list
+        List<Post> scoreList = postMapper.getScoreList();
+        //获取id和score
+        List<ScoreListVo> scoreListVoList = scoreList.stream()
+                .map(post -> new ScoreListVo(post.getPostId(), post.getTotalScore()))
+                .collect(Collectors.toList());
+        //获取map
+        List<String> ids = scoreListVoList.stream()
+                .map(o -> o.getId())
+                .collect(Collectors.toList());
+
+        QueryWrapper<Post> userQuery = new QueryWrapper<>();
+        userQuery.in("post_id", ids);
+
+        List<Post> posts = postMapper.selectList(userQuery);
+        Map<String, Post> collect = posts.stream()
+                .collect(Collectors.toMap(Post::getPostId, post -> post));
+
+        return new TaskDataRes(collect,scoreListVoList);
     }
 
 

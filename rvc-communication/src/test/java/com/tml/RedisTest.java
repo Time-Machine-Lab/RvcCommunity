@@ -2,17 +2,23 @@ package com.tml;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.tml.client.CommunicationServiceClient;
 import com.tml.domain.dto.PostDto;
 import com.tml.domain.entity.Post;
 import com.tml.domain.entity.PostType;
+import com.tml.domain.vo.ScoreListVo;
 import com.tml.mapper.post.PostMapper;
 import com.tml.service.PostService;
 import com.tml.utils.RedisCache;
+import io.github.common.web.Result;
 import org.jasypt.encryption.StringEncryptor;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ZSetOperations;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
@@ -48,15 +54,32 @@ public class RedisTest {
     @Resource
     private PostMapper postMapper;
 
+    @Resource
+    private RedisTemplate redisTemplate;
+
 
     @Test
     public void TransactionalTest(){
-//        Post post = postMapper.selectById("1746190259156287488");
-//        System.out.println(post);
+        List<Post> scoreList = postMapper.getScoreList();
+        List<ScoreListVo> scoreListVoList = scoreList.stream()
+                .map(post -> new ScoreListVo(post.getPostId(), post.getTotalScore()))
+                .collect(Collectors.toList());
 
-        int n = 0,m = 0;
+        List<String> ids = scoreListVoList.stream()
+                .map(o -> o.getId())
+                .collect(Collectors.toList());
+
+
+        QueryWrapper<Post> userQuery = new QueryWrapper<>();
+        userQuery.in("post_id", ids);
+
+        List<Post> posts = postMapper.selectList(userQuery);
+        Map<String, Post> collect = posts.stream()
+                .collect(Collectors.toMap(Post::getPostId, post -> post));
+
 
     }
+
 
 
     @Test
@@ -74,6 +97,19 @@ public class RedisTest {
         }
 
 
+
+    }
+
+    @Test
+    public void topTest(){
+        PostDto postDto = new PostDto();
+        postDto.setTitle("测试帖子");
+        postDto.setContent("测试帖子");
+        postDto.setCoverId("1746188338123112448");
+        postDto.setTagId("1");
+
+        ZSetOperations zSetOps = redisTemplate.opsForZSet();
+        zSetOps.add("rvc:top:test", postDto, 1.0);
 
     }
 

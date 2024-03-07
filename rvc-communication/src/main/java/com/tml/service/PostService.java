@@ -5,6 +5,7 @@ import com.tml.domain.dto.CoverDto;
 import com.tml.domain.dto.PageInfo;
 import com.tml.domain.dto.PostDto;
 import com.tml.domain.vo.PostVo;
+import com.tml.domain.vo.TaskDataRes;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -37,4 +38,6 @@ public interface PostService {
     String updUserProfile(MultipartFile profile,String uid) throws IOException;
 
     String coverUrl(CoverDto coverDto);
+
+    TaskDataRes scoreList();
 }

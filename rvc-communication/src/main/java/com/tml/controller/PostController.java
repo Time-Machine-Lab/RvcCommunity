@@ -10,6 +10,7 @@ import com.tml.domain.dto.CoinDto;
 import com.tml.domain.dto.CoverDto;
 import com.tml.domain.dto.PageInfo;
 import com.tml.domain.dto.PostDto;
+import com.tml.domain.vo.TaskDataRes;
 import com.tml.feign.RvcCommunicationServiceFeignClient;
 import com.tml.service.PostService;
 import io.github.common.web.Result;
@@ -146,5 +147,15 @@ public class PostController {
     @WhiteApi
     public Result coverUrl(@RequestBody CoverDto coverDto) {
         return Result.success(postService.coverUrl(coverDto));
+    }
+
+
+    /**
+     * 获取帖子分数
+     */
+    @GetMapping("/scoreList")
+    @SystemLog(businessName = "获取帖子分数")
+    public Result<TaskDataRes> scoreList() {
+        return Result.success(postService.scoreList());
     }
 }

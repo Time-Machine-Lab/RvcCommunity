@@ -77,4 +77,7 @@ public class Post {
     private String labels;
 //    (1:帖子被删除  0：未删除)
     private Integer hasDelete;
+
+    @TableField(exist = false)
+    private double totalScore;
 }
