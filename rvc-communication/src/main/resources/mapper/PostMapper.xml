@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tml.mapper.post.PostMapper">
+    <select id="getScoreList" resultType="com.tml.domain.entity.Post">
+        SELECT r.post_id,
+               comment_num,
+               like_num,
+               collect_num,
+               watch_num,
+               (comment_num * 0.5 + like_num * 0.5 + collect_num * 0.5 + watch_num * 0.5) AS total_score
+        FROM rvc_communication_post r
+                 JOIN (
+            SELECT post_id FROM rvc_communication_post ORDER BY comment_num DESC LIMIT 1000
+        ) f ON r.post_id = f.post_id
+                 JOIN (
+            SELECT post_id FROM rvc_communication_post ORDER BY like_num DESC LIMIT 1000
+        ) p ON r.post_id = p.post_id
+                 JOIN (
+            SELECT post_id FROM rvc_communication_post ORDER BY collect_num DESC LIMIT 1000
+        ) fn ON r.post_id = fn.post_id
+                 JOIN (
+            SELECT post_id FROM rvc_communication_post ORDER BY watch_num DESC LIMIT 1000
+        ) m ON r.post_id = m.post_id
+        ORDER BY total_score DESC
+            LIMIT 1000;
+    </select>
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.tml.mapper.UserDataMapper">
+    <select id="selectTop1000UsersByFans" resultType="com.tml.pojo.DO.UserData">
+        SELECT * FROM rvc_user_data ORDER BY fans_num DESC LIMIT 1000;
+    </select>
+    <select id="selectTop10000UsersTop" resultType="com.tml.pojo.DO.UserData">
+        SELECT r.uid,
+               follow_num,
+               post_num,
+               fans_num,
+               model_num,
+               (follow_num * 0.5 + post_num * 0.5 + fans_num * 0.5 + model_num * 0.5) AS total_score
+        FROM rvc_user_data r
+                 JOIN (
+            SELECT uid FROM rvc_user_data ORDER BY follow_num DESC LIMIT 1000
+        ) f ON r.uid = f.uid
+                 JOIN (
+            SELECT uid FROM rvc_user_data ORDER BY post_num DESC LIMIT 1000
+        ) p ON r.uid = p.uid
+                 JOIN (
+            SELECT uid FROM rvc_user_data ORDER BY fans_num DESC LIMIT 1000
+        ) fn ON r.uid = fn.uid
+                 JOIN (
+            SELECT uid FROM rvc_user_data ORDER BY model_num DESC LIMIT 1000
+        ) m ON r.uid = m.uid
+        ORDER BY total_score DESC
+            LIMIT 1000;
+    </select>
+
+
+</mapper>

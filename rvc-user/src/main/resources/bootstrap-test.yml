@@ -1,0 +1,16 @@
+spring:
+  cloud:
+    nacos:
+      server-addr: ${NACOS_SERVER_ADDR:ENC(0+lMOGVDBO4F81w0IYsq1nbJ68SsAbCXd0oZLCjPgdU=)}
+      username: ${NACOS_SERVER_USER:ENC(74lu5M++MgvsFZXcqUzgfBnVs5md4Ws3)}
+      password: ${NACOS_SERVER_PASSWORD:ENC(LUTdAto7NS2SXxnzxWAxRpMraXEq3cYVHSnHwfhO+RU=)}
+      config:
+        file-extension: yaml
+        prefix: rvc-public-config
+        namespace: 98732302-bf12-40a5-8d93-7f2d97187a12
+      discovery:
+        namespace: 98732302-bf12-40a5-8d93-7f2d97187a12
+        cluster-name: BJ
+        #      discovery:
+        ip: ${SERVER_ADDR:ENC(7+i1abkV1AAW737zy56ZvAWdcUq8AKM0WufHtc+3eqo=)}
+

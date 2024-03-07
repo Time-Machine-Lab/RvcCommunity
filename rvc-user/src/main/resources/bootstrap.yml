@@ -1,0 +1,26 @@
+server:
+  port: ${SERVER_PORT:9000}
+spring:
+  config:
+    import: classpath:you-cant-see-that.yml
+  application:
+    name: rvc-user-service
+  profiles:
+    active: ${ACTIVE:dev}
+feign:
+  client:
+    config:
+      default:
+        connect-timeout: 30000
+        read-timeout: 30000
+  httpclient:
+    enabled: true # 支持HttpClient的开关
+    max-connections: 200 # 最大连接数
+    max-connections-per-route: 50 # 单个路径的最大连接数
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+logging:
+  pattern:
+    dateformat: MM-dd HH:mm:ss:SSS
+  level:
+    com.tml: debug
